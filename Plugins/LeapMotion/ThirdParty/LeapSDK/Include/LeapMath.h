@@ -1,5 +1,5 @@
 /******************************************************************************\
-* Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               *
+* Copyright (C) 2012-2016 Leap Motion, Inc. All rights reserved.               *
 * Leap Motion proprietary and confidential. Not for distribution.              *
 * Use subject to the terms of the Leap Motion SDK Agreement available at       *
 * https://developer.leapmotion.com/sdk_agreement, or another agreement         *
@@ -21,7 +21,7 @@ namespace Leap {
  * The constant pi as a single precision floating point number.
  * @since 1.0
  */
-//static const float PI          = 3.1415926536f;
+static const float PI          = 3.1415926536f;
 /**
  * The constant ratio to convert an angle measure from degrees to radians.
  * Multiply a value in degrees by this constant to convert to radians.
@@ -378,7 +378,7 @@ struct Vector {
   Vector normalized() const {
     float denom = this->magnitudeSquared();
     if (denom <= EPSILON) {
-      return Vector::zero();
+      return zero();
     }
     denom = 1.0f / std::sqrt(denom);
     return Vector(x * denom, y * denom, z * denom);

@@ -1,66 +1,108 @@
 leap-ue4
 ====================
 
-An event-driven [Leap Motion](http://www.leapmotion.com) plugin for the Unreal Engine 4.
+An event-driven [Leap Motion](http://www.leapmotion.com) plugin for the Unreal Engine 4. 
 
-Main method of use is by subscribing to events within your blueprint, but it also supports polling through functions called on the LeapController for up to the 60 past frames. You can extend functionality to any blueprint through adding the LeapInterfaceEvent interface then adding the LeapController component to that blueprint. This same architecture is available to C++ if you prefer, which also supports both event-driven and polling style use.
+You can use convenience blueprints to just select and play or use a custom approach via blueprints or C++. See relevant sections for details
+
+You can extend functionality to any blueprint through adding the LeapInterfaceEvent interface then adding the LeapController component to that blueprint. This same architecture is available to C++ if you prefer, which also supports both event-driven and polling style use.
 
 See [unreal thread](https://forums.unrealengine.com/showthread.php?49107-Plugin-Leap-Motion-Event-Driven) for version downloads and development updates.
 
-##How to install it##
+Since 4.11 this is now the official plugin!
+
+##How to Setup (since 4.11)##
 
 1. Create new or open a project. 
-2. Browse to your project root (typically found at *Documents/Unreal Projects/{Your Project Root}*)
-3. Copy *Plugins* folder into your Project root.
-4. Copy *Binaries* folder into your Project root.
-5. (Optional) Copy *Content* folder into your Project root.
-5. Restart the Editor and open your project again.
-6. Select Window->Plugins. Click on Installed and you should see a category called Input and a plugin called Leap Motion now available. It should be automatically enabled, if not, Select Enabled. The Editor will warn you to restart, click restart.
-7. The plugin should be enabled and ready to use.
+2. Select Window->Plugins. Click on the *Input Devices* category and you should see a plugin called Leap Motion. Select Enabled. The Editor will warn you to restart, click restart.
+3. The plugin should be enabled and ready to use.
 
-<img src="http://i.imgur.com/2In3q5n.png">
+<img src="http://i.imgur.com/h9ib6GP.gif">
 
 
-##How to use it - Convenience Rigged/Debug Character##
-Since 0.7.10 the plugin includes convenience content for easy reference of say a rigged setup. Simply drag the optional Content folder
+##How to use it - Convenience Rigged Characters##
+Since 0.7.10 the plugin includes convenience content for easy reference of say a rigged setup. Since 0.9 these are automatically included as plugin content.
 
-<img src="http://i.imgur.com/RaHnkWt.png">
+####Convenience Characters####
 
-####Rigged Character####
+To try the rigged or floating hands characters, change your game mode to use *LeapRiggedCharacter* or *LeapFloatingHandsCharacter* as your default pawn.
 
-To try the rigged character, change your default pawn to LeapRiggedCharacter and change your PlayerController to VRPlayerController (if using hmd)
-
-<img src ="http://i.imgur.com/5fJtEWY.gif">
+<img src ="http://i.imgur.com/3jP66IJ.gif">
 
 That's it! hit play to try it out!
 
 <img src ="http://i.imgur.com/HWVaeid.gif">
 <br>
-####Debug Sphere Character####
 
-To try out the debug character, simply change your default pawn to LeapDebugCharacter
-<img src="http://i.imgur.com/Bu5GmBq.png">
+If you wish to toggle floating hand types, add *ChangeHands* to your input action mapping, e.g. using the keyboard button *H*
 
-<img src="http://i.imgur.com/MYxyqzD.png">
+####Add Convenience Leap Hands to Custom Character####
+
+1. Add a camera to your pawn/character, parent e.g. *LeapRiggedEchoHandsActor* or *LeapImageHandsActor* to that camera as a child actor.
+2. Optionally modify parameters
+3. Hit play!
+
+####Collision Character####
+Since 0.9.3 you can add collision by changing your character from LeapRiggedCharacter to LeapCollisionCharacter. If you want to modify the passthrough character or your own sub-class to have collision simply change one setting in your pawn.
+
+First select your mesh
+
+<img src ="http://i.imgur.com/zBzgWaF.png">
+
+Change the collision preset to PhysicsActor
+
+<img src= "http://i.imgur.com/dAsdcEo.png">
+
+This will use the BasicBody_Physics PhysicsAsset included with the plugin content for collision. You can modify the collision shapes there to modify what part of your mesh collides with the world.
+
+<img src="http://i.imgur.com/g9oChrM.png">
+
+Using collision you can now interact directly with movable actors with physics simulation turned on.
+
+<img src="http://i.imgur.com/IVEQ2fp.gif">
+
+####Passthrough Character####
+
+Pass-through is supported from 0.9, useful if you wish to blend real-world for AR purposes or simply wish to see where you type in vr. 
+Simply select LeapPassthroughCharacter as your pawn and keep the controller as VRController
+
+<img src ="http://i.imgur.com/D7ifDlj.gif">
+
+Play to try out AR/VR transition with a simple gesture
+
+<img src ="http://i.imgur.com/ozbhr3E.gif">
 <br>
-####Note on HMD mode####
+###Convenience Setup and Notes###
 
-Both characters have two LeapDebugHand objects and swaps dynamically between them to display the hands in both default mode (leap on table facing up) and HMD mode
-<img src="http://i.imgur.com/JbaKYMb.png">
+Convenience content is built with re-usability in mind. Below is a diagram showing how all the blueprint classes relate.
 
-##How to use it - Blueprint Quick Setup##
+<img src ="http://i.imgur.com/TQRDmux.png">
+Convenience content relation diagram
+
+The LeapBasicRiggedCharacter has only one skeletal mesh and can be used as a basis for basic non-VR characters. If you're rigging a VR character you should split the mesh head from the body so that it can be hidden from the character in order to alleviate clipping issues, this is the functionality that the LeapRiggedCharacter extends from the basic version. Finally if you want to have automatic access to passthrough mode, use the LeapPassthroughCharacter.
+
+What this setup gives you in flexibility is that you have many entry points from which to modify any aspect of the rigging. E.g. If you wish to change post process material being used you would change it in the PPChanger blueprint while still retaining every other functionality. Or if you want to adjust the default mode offset (where your leap is in relation to you when place on the table) you would modify the LeapAnimBodyConnector component which specifies its location. If you want to use your own skeletal mesh, simply replace the mesh, but retain the animation blueprint (use animation retargeting if you're using different skeletons). In fact the rigging setup doesn't even need the leap motion to work, any input which would change the AnimBody skeleton to whatever pose you wish to attain would have the same rigged behavior. The setup is the beginning part of a BodyInput plugin which will support a similar setup for various VR inputs in the future.
+<br>
+####Note on Leap Base offset in Default Mode####
+
+All rigged characters automatically swap the appropriate leap offset to display the hands in both default mode (leap on table facing up) and HMD mode by detecting when the user enables their HMD (e.g. by going fullscreen in UE4).
+<img src="http://i.imgur.com/nEk4d3J.png">
+
+Should you wish to adjust the offset when using the leap on the table facing up, modify the position of the DefaultModeSprite in the LeapAnimBodyConnector. VR mode needs no adjustment as it is always 1:1 due to being attached to your HMD .
+
+##How to use it - Blueprint without Convenience Content, Quick Setup##
 <ol>
 <li>Open desired blueprint where you want to receive the leap events.</li>
-<li>Click on Blueprint Props and Scroll down in the details panel to Interfaces. </li>
+<li>Click on Class Settings and Scroll down in the details panel to Interfaces. </li>
 
-<img src="http://i.imgur.com/s790gBs.png">
+<img src="http://i.imgur.com/apyiM2c.png">
 
 <li>Add the interface called LeapEventInterface</li>
 <li>Add Leap Controller Component through option A <b>or</b> B</li>
 
 <b>Option A:</b> 
-Add directly through components tab
-<img src="http://i.imgur.com/640f5gS.png">
+Add directly through Add Components
+<img src="http://i.imgur.com/bGoWWbg.png">
 
 <br/>
 <b>Option B:</b> Place BeginPlay event on your event graph, drag out from the execute node typing 'Leap', select Add LeapController.</li>
@@ -195,28 +237,12 @@ Available blueprint classes branching from LeapController:
 <li>ToolList</li>
 </ul>
 
-##Shipping/Packaged Builds##
-<ol>
-<li> Projects require code, if you are using a blueprint only project, add an empty class and compile your project module. You simply do File->Add Code to Project and it can be anything so I usually just pick None->Create Class and then it will ask you to open visual studio where you just hit compile (Build solution). If you haven't added code before follow the unreal engine <a href="https://docs.unrealengine.com/latest/INT/Programming/QuickStart/1/index.html">programming Quick Start</a> guide. Essentially it boils down to downloading the free Visual Studio Community and changing a few small configs.</li>
-<li> Add the following line to your DefaultEngine.ini </li>
-
-<i>EnabledPlugins=LeapMotion</i>
-
-under <i>[Plugins]</i>, create this category if missing.
-
-<li> Package your content</li>
-<li> In your packaged directory drag the <i>Binaries</i> folder from this plugin into your packaged project folder. E.g. if I have a packaged folder called <i>LeapPluginTest</i>
-find <i>WindowsNoEditor/LeapPluginTest</i>, this is your packaged project root. Add the binaries folder there.</li>
-</ol>
-
 ###Shipping Troubleshooting###
 - If you get errors complaining 'Leap Motion' plugin cannot be found, you do not have code in your project.
 - If you get errors complaining the 'Leap.dll' is missing, you did not drag binaries to the correct location.
 
 ##Todo##
 
-- Convenience content (e.g. fully rigged hand)
-- Wiki
 - C++ how to
 
 ##Contact##
