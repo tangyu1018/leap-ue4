@@ -30,7 +30,7 @@ public:
 	*
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "HandMoved", CompactNodeTitle = "", Keywords = "hand moved"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent , meta = (DisplayName = "HandMoved", CompactNodeTitle = "", Keywords = "hand moved"), Category = "Leap Interface Event")
 	void LeapHandMoved(ULeapHand* Hand);
 
 	/**
@@ -38,7 +38,7 @@ public:
 	*
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "LeftHandMoved", CompactNodeTitle = "", Keywords = "left hand moved"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "LeftHandMoved", CompactNodeTitle = "", Keywords = "left hand moved"), Category = "Leap Interface Event")
 	void LeapLeftHandMoved(ULeapHand* Hand);
 
 	/**
@@ -46,7 +46,7 @@ public:
 	*
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "RightHandMoved", CompactNodeTitle = "", Keywords = "right hand moved"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "RightHandMoved", CompactNodeTitle = "", Keywords = "right hand moved"), Category = "Leap Interface Event")
 	void LeapRightHandMoved(ULeapHand* Hand);
 
 	/**
@@ -55,7 +55,7 @@ public:
 	* @param Strength	grabbing strength from 0-1.0
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "HandGrabbed", CompactNodeTitle = "", Keywords = "hand grab"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "HandGrabbed", CompactNodeTitle = "", Keywords = "hand grab"), Category = "Leap Interface Event")
 	void LeapHandGrabbed(float Strength, ULeapHand* Hand);
 
 	/**
@@ -64,7 +64,7 @@ public:
 	* @param Strength	grabbing strength from 0-1.0
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "HandGrabbing", CompactNodeTitle = "", Keywords = "hand grab"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "HandGrabbing", CompactNodeTitle = "", Keywords = "hand grab"), Category = "Leap Interface Event")
 	void LeapHandGrabbing(float Strength, ULeapHand* Hand);
 
 	/**
@@ -73,7 +73,7 @@ public:
 	* @param Strength	grabbing strength from 0-1.0
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "HandReleased", CompactNodeTitle = "", Keywords = "hand released ungrab"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "HandReleased", CompactNodeTitle = "", Keywords = "hand released ungrab"), Category = "Leap Interface Event")
 	void LeapHandReleased(float Strength, ULeapHand* Hand);
 
 	/**
@@ -82,7 +82,7 @@ public:
 	* @param Strength	pinch strength from 0-1.0
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "HandPinched", CompactNodeTitle = "", Keywords = "hand pinch"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "HandPinched", CompactNodeTitle = "", Keywords = "hand pinch"), Category = "Leap Interface Event")
 	void LeapHandPinched(float Strength, ULeapHand* Hand);
 
 	/**
@@ -91,7 +91,7 @@ public:
 	* @param Strength	pinch strength from 0-1.0
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "HandPinching", CompactNodeTitle = "", Keywords = "hand grab"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "HandPinching", CompactNodeTitle = "", Keywords = "hand grab"), Category = "Leap Interface Event")
 	void LeapHandPinching(float Strength, ULeapHand* Hand);
 
 	/**
@@ -100,7 +100,7 @@ public:
 	* @param Strength	pinch strength from 0-1.0
 	* @param Hand		reference to LeapHand object containing data for the tracked hand
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "HandUnpinched", CompactNodeTitle = "", Keywords = "hand unpinch"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "HandUnpinched", CompactNodeTitle = "", Keywords = "hand unpinch"), Category = "Leap Interface Event")
 	void LeapHandUnpinched(float Strength, ULeapHand* Hand);
 
 	/**
@@ -108,7 +108,7 @@ public:
 	*
 	* @param Count		Number of hands visible
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "HandCountChanged", CompactNodeTitle = "", Keywords = "hand count"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "HandCountChanged", CompactNodeTitle = "", Keywords = "hand count"), Category = "Leap Interface Event")
 	void HandCountChanged(int32 Count);
 
 	//Fingers
@@ -118,7 +118,7 @@ public:
 	*
 	* @param Finger		reference to LeapFinger object containing data for the tracked finger
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "FingerMoved", CompactNodeTitle = "", Keywords = "finger moved"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "FingerMoved", CompactNodeTitle = "", Keywords = "finger moved"), Category = "Leap Interface Event")
 	void LeapFingerMoved(ULeapFinger* Finger);
 
 	/**
@@ -126,7 +126,7 @@ public:
 	*
 	* @param Finger		reference to LeapFinger object containing data for the tracked finger
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "FrontFingerMoved", CompactNodeTitle = "", Keywords = "finger front most moved"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "FrontFingerMoved", CompactNodeTitle = "", Keywords = "finger front most moved"), Category = "Leap Interface Event")
 	void LeapFrontMostFingerMoved(ULeapFinger* Finger);
 
 	/**
@@ -134,7 +134,7 @@ public:
 	*
 	* @param Finger		reference to LeapFinger object containing data for the tracked finger
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "LeftFingerMoved", CompactNodeTitle = "", Keywords = "finger left most moved"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "LeftFingerMoved", CompactNodeTitle = "", Keywords = "finger left most moved"), Category = "Leap Interface Event")
 	void LeapRightMostFingerMoved(ULeapFinger* Finger);
 
 	/**
@@ -142,7 +142,7 @@ public:
 	*
 	* @param Finger		reference to LeapFinger object containing data for the tracked finger
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "RightFingerMoved", CompactNodeTitle = "", Keywords = "finger right most moved"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "RightFingerMoved", CompactNodeTitle = "", Keywords = "finger right most moved"), Category = "Leap Interface Event")
 	void LeapLeftMostFingerMoved(ULeapFinger* Finger);
 
 	/**
@@ -151,7 +151,7 @@ public:
 	*
 	* @param Finger		reference to LeapFinger object containing data for the tracked finger
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "LeapFrontFingerTouch", CompactNodeTitle = "", Keywords = "finger touched"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "LeapFrontFingerTouch", CompactNodeTitle = "", Keywords = "finger touched"), Category = "Leap Interface Event")
 	void LeapFrontFingerTouch(ULeapFinger* Finger);		//emitted only for frontmost finger, typically best use case
 
 	/**
@@ -159,7 +159,7 @@ public:
 	*
 	* @param Count		Number of fingers visible
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "FingerCountChanged", CompactNodeTitle = "", Keywords = "finger count"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "FingerCountChanged", CompactNodeTitle = "", Keywords = "finger count"), Category = "Leap Interface Event")
 	void FingerCountChanged(int32 Count);
 
 	//Gestures - Only emits if enabled
@@ -169,7 +169,7 @@ public:
 	*
 	* @param Gesture		gesture object detected, can be cast to a sub-class for specific methods
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "GestureDetected", CompactNodeTitle = "", Keywords = "gesture detect"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "GestureDetected", CompactNodeTitle = "", Keywords = "gesture detect"), Category = "Leap Interface Event")
 	void GestureDetected(ULeapGesture* Gesture);
 
 	/**
@@ -177,7 +177,7 @@ public:
 	*
 	* @param Gesture		circle gesture object detected, can be queried to get details of the event such as radius
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (Keywords = "gesture circle detect"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (Keywords = "gesture circle detect"), Category = "Leap Interface Event")
 	void CircleGestureDetected(ULeapCircleGesture* Gesture);
 
 	/**
@@ -185,7 +185,7 @@ public:
 	*
 	* @param Gesture		key tap gesture object detected, can be queried to get details of the event
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (Keywords = "gesture key tap detect"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (Keywords = "gesture key tap detect"), Category = "Leap Interface Event")
 	void KeyTapGestureDetected(ULeapKeyTapGesture* Gesture);
 
 	/**
@@ -193,7 +193,7 @@ public:
 	*
 	* @param Gesture		screen tap gesture object detected, can be queried to get details of the event
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (Keywords = "gesture screen tap detect"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (Keywords = "gesture screen tap detect"), Category = "Leap Interface Event")
 	void ScreenTapGestureDetected(ULeapScreenTapGesture* Gesture);
 
 	/**
@@ -201,7 +201,7 @@ public:
 	*
 	* @param Gesture		swipe gesture object detected, can be queried to get details of the event
 	*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (Keywords = "gesture swipe detect"), Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, meta = (Keywords = "gesture swipe detect"), Category = "Leap Interface Event")
 	void SwipeGestureDetected(ULeapSwipeGesture* Gesture);
 
 	//Images - Only emits if enabled
@@ -212,7 +212,7 @@ public:
 	* @param Texture		UTexture2D representation of the raw leap image
 	* @param Image			image object containing details relevant to the image such as distorion
 	*/
-	UFUNCTION(BlueprintImplementableEvent, Category = "Leap Interface Event")
+	UFUNCTION(BlueprintNativeEvent, Category = "Leap Interface Event")
 	void RawImageReceived(UTexture2D* Texture, ULeapImage* Image);
 
 	//Help identifying
