@@ -7,4 +7,6 @@
 *.DS_Store
 
 #folders
-Plugins/LeapMotion/Intermediate
+Intermediate
+Binaries/Win64/UE4Editor.modules
+Binaries/Win64/UE4Editor-LeapMotion.dll
