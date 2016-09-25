@@ -2,7 +2,7 @@
 #include "FLeapMotionInputDevice.h"
 
 #define LOCTEXT_NAMESPACE "LeapPlugin"
-#define PLUGIN_VERSION "2.0.0"
+#define PLUGIN_VERSION "2.1.0"
 
 void FLeapMotionPlugin::StartupModule()
 {
