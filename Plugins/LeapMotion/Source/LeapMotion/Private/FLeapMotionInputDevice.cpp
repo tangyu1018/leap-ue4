@@ -1,5 +1,6 @@
 #include "LeapMotionPrivatePCH.h"
 #include "IHeadMountedDisplay.h"
+#include "IXRTrackingSystem.h"
 #include "LeapEventInterface.h"
 #include "FLeapMotionInputDevice.h"
 #include "LeapHand.h"
@@ -66,7 +67,7 @@ LeapHMDSnapshot HMDSnapshotSamples::CurrentHMDSample()
 	Snapshot.Orientation;
 	Snapshot.Position;
 
-	GEngine->HMDDevice->GetCurrentOrientationAndPosition(Snapshot.Orientation, Snapshot.Position);
+	GEngine->XRSystem->GetCurrentPose(IXRTrackingSystem::HMDDeviceId, Snapshot.Orientation, Snapshot.Position);
 	return Snapshot;
 }
 
@@ -244,7 +245,7 @@ void FLeapMotionInputDevice::ParseEvents()
 	Leap::Frame PastFrame = ControllerData.LeapController.frame(1);
 
 	//Calculate HMD Timewarp if valid
-	if (GEngine->HMDDevice.IsValid() && ControllerData.bTimeWarpEnabled) {
+	if (GEngine->XRSystem->IsTracking(IXRTrackingSystem::HMDDeviceId) && ControllerData.bTimeWarpEnabled) {
 		LeapHMDSnapshot ThenSnapshot = HMDSamples->HMDSampleClosestToTimestamp(Frame.timestamp());
 		LeapHMDSnapshot NowSnapShot = HMDSamples->CurrentHMDSample();
 

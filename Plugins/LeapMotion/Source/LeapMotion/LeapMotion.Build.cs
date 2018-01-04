@@ -8,12 +8,12 @@ namespace UnrealBuildTool.Rules
 	{
         private string ModulePath
         {
-            get { return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name)); }
+            get { return Path.GetDirectoryName(ModuleDirectory); }
         }
 
         private string ThirdPartyPath
         {
-            get { return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/")); }
+            get { return Path.GetFullPath(Path.Combine(ModulePath, "../ThirdParty/")); }
         }
 
         private string BinariesPath
@@ -26,8 +26,8 @@ namespace UnrealBuildTool.Rules
             get { return Path.GetFullPath(Path.Combine(ThirdPartyPath, "LeapSDK","Lib")); }
         }
 
-		public LeapMotion(TargetInfo Target)
-		{
+		public LeapMotion(ReadOnlyTargetRules Target) : base(Target)
+        {
 			PublicIncludePaths.AddRange(
 				new string[] {
 					"LeapMotion/Public",
@@ -77,7 +77,7 @@ namespace UnrealBuildTool.Rules
             LoadLeapLib(Target);
 		}
 
-        public bool LoadLeapLib(TargetInfo Target)
+        public bool LoadLeapLib(ReadOnlyTargetRules Target)
         {
             bool isLibrarySupported = false;
 

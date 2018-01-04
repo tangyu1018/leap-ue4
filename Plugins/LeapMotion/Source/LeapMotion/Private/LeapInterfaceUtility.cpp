@@ -1,5 +1,6 @@
 #include "LeapMotionPrivatePCH.h"
 #include "IHeadMountedDisplay.h"
+#include "IXRTrackingSystem.h"
 #include "LeapGesture.h"
 
 DEFINE_LOG_CATEGORY(LeapPluginLog);
@@ -32,11 +33,11 @@ FVector AdjustForLeapFacing(FVector In)
 
 FVector AdjustForHMD(FVector In)
 {
-	if (GEngine->HMDDevice.IsValid())
+	if (GEngine->XRSystem->IsTracking(IXRTrackingSystem::HMDDeviceId))
 	{
 		FQuat OrientationQuat;
 		FVector Position;
-		GEngine->HMDDevice->GetCurrentOrientationAndPosition(OrientationQuat, Position);
+		GEngine->XRSystem->GetCurrentPose(IXRTrackingSystem::HMDDeviceId, OrientationQuat, Position);
 		FVector Out = OrientationQuat.RotateVector(In);
 		if (LeapShouldAdjustPositionForHMD)
 		{
@@ -56,11 +57,11 @@ FVector AdjustForHMD(FVector In)
 
 FVector adjustForHMDOrientation(FVector In)
 {
-	if (GEngine->HMDDevice.IsValid())
+	if (GEngine->XRSystem->IsTracking(IXRTrackingSystem::HMDDeviceId))
 	{
 		FQuat OrientationQuat;
 		FVector Position;
-		GEngine->HMDDevice->GetCurrentOrientationAndPosition(OrientationQuat, Position);
+		GEngine->XRSystem->GetCurrentPose(IXRTrackingSystem::HMDDeviceId, OrientationQuat, Position);
 		FVector Out = OrientationQuat.RotateVector(In);
 		return Out;
 	}
@@ -83,11 +84,11 @@ FVector ConvertLeapToUE(Leap::Vector LeapVector)
 		
 		if (LeapShouldAdjustRotationForHMD)
 		{
-			if (GEngine->HMDDevice.IsValid())
+			if (GEngine->XRSystem->IsTracking(IXRTrackingSystem::HMDDeviceId))
 			{
 				FQuat orientationQuat;
 				FVector position;
-				GEngine->HMDDevice->GetCurrentOrientationAndPosition(orientationQuat, position);
+				GEngine->XRSystem->GetCurrentPose(IXRTrackingSystem::HMDDeviceId, orientationQuat, position);
 				ConvertedVector = orientationQuat.RotateVector(ConvertedVector);
 			}
 		}

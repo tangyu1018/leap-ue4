@@ -2,6 +2,8 @@
 
 #include "LeapMotionPrivatePCH.h"
 #include "LeapBlueprintFunctionLibrary.h"
+#include "IXRTrackingSystem.h"
+#include "IHeadMountedDisplay.h"
 #include "FLeapMotionInputDevice.h"
 
 ULeapBlueprintFunctionLibrary::ULeapBlueprintFunctionLibrary(const class FObjectInitializer& Initializer)
@@ -27,7 +29,7 @@ void ULeapBlueprintFunctionLibrary::EnableTimeWarp(bool Enable /*= true*/, float
 void ULeapBlueprintFunctionLibrary::GetHMDFieldOfView(float& OutHFOVInDegrees, float& OutVFOVInDegrees)
 {
 	float HFOV, VFOV;
-	GEngine->HMDDevice->GetFieldOfView(HFOV, VFOV);
+	GEngine->XRSystem->GetHMDDevice()->GetFieldOfView(HFOV, VFOV);
 	OutHFOVInDegrees = HFOV;
 	OutVFOVInDegrees = VFOV;
 }
