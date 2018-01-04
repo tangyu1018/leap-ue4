@@ -11,3 +11,6 @@ Plugins/LeapMotion/Intermediate
 Intermediate/
 .vs/
 Saved/
+*.db
+*.opendb
+Binaries
